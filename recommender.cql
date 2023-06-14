@@ -1,3 +1,6 @@
+// Give all edges an equal weight (because we dont have a weight property or something similar in our data)
+MATCH ()-[r]-() SET r.weight = 1.0
+
 //Create Graph Projection 
 CALL gds.graph.project(
   'recommenderTest11',
@@ -48,8 +51,9 @@ CALL gds.knn.write(
     writeRelationshipType: 'USERS_ALSO_LIKED',
     writeProperty: 'score',
     nodeLabels: ['Restaurant'],
+    topK: 5,
     randomSeed: 42,
-	concurrency: 1
+    concurrency: 1
   }
 )
 YIELD relationshipsWritten
