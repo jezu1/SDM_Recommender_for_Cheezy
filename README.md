@@ -21,8 +21,6 @@ Other technologies used within the project:
 * Pyspark: 3.3.0
 * Neo4j connector: neo4j-connector-apache-spark_2.12_3.0-4.0.0
 * Neo4j: 4.4.20
-* VM Credentials: VM user: masterBD01 -- Password: tKtyPg4nNn
-* Ubuntu user: User: hadoop -- Password: foodie
 * Neo4j user: User: neo4j -- Password: foodie
 
 ## Neo4j Graph Creation
