@@ -96,7 +96,7 @@ driver.close()
 # In[14]:
 
 
-# # UNCOMMENT IF YOU WANT TO RELOAD ALL NODES
+# # UNCOMMENT IF YOU WANT TO DELETE ALL NODES AND RECREATE THE GRAPH
 # batch_size = 1000
 
 # # Delete nodes in batches
@@ -431,32 +431,6 @@ with driver.session() as session:
 driver.close()
 
 
-# In[18]:
-
-
-# Load the Delta Lake table into a DataFrame
-df_opening_hours = spark.read.format("delta").load("hdfs://localhost:9000/user/hadoop/delta/warehouse/opening_hours")
-
-# Create a temporary view for the DataFrame
-df_opening_hours.createOrReplaceTempView("opening_hours")
-
-# Define the Cypher query to create nodes
-with driver.session() as session:
-    # Iterate over the rows of the DataFrame
-    for row in df_opening_hours.collect():
-        # Create a node for each row
-        session.run(
-            "MERGE (o:Opening_hours {ra_key: $ra_key, day_key: $day_key})"
-            "SET o.open_time = $open_time, o.close_time = $close_time",
-            ra_key=row.ra_key,
-            day_key=row.day_key,
-            open_time=row.open_time,
-            close_time=row.close_time
-            
-
-        )
-driver.close()
-
 
 # In[18]:
 
@@ -562,35 +536,6 @@ with driver.session() as session:
         uploader_id = image_row['uploaderId']
         imageId = image_row['id']
         session.run(query, uploader_id=uploader_id, imageId=imageId)
-
-# Close the Neo4j driver
-driver.close()
-
-
-# In[23]:
-
-
-# Read Spark DataFrames
-user_df = spark.read.format("delta").load("hdfs://localhost:9000/user/hadoop/delta/warehouse/users")
-locations_df = spark.read.format("delta").load("hdfs://localhost:9000/user/hadoop/delta/warehouse/locations")
-
-# Register the DataFrames as temporary views
-user_df.createOrReplaceTempView("users")
-locations_df.createOrReplaceTempView("locations")
-
-# Define the Cypher query
-query = """
-    MERGE (u:User {id: $userId})
-    MERGE (i:Locations {id: $id})
-    CREATE (u)-[:IS_LOCATED]->(i)
-    """
-
-# Execute the query for each row in the DataFrames
-with driver.session() as session:
-    for locations_row in locations_df.collect():
-        userId = locations_row['userId']
-        id = locations_row['id']
-        session.run(query, id=id, userId=userId)
 
 # Close the Neo4j driver
 driver.close()
