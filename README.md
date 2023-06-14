@@ -2,6 +2,7 @@
 Building a recommender for Cheezy start-up idea
 
 ##Prerequisite 
+
 Delta Lake:
 io.delta:delta-core_2.12:2.1.0
 
