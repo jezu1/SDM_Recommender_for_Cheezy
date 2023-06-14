@@ -28,4 +28,11 @@ Neo4j is running in the vitual machine, so please enter to the VM with the crede
 sudo /opt/neo4j/bin/neo4j restart
 and you will be able to access neo4j in your brwoser in this address: http://10.4.41.56:7474/browser/
 
+### Running the graph creattion
+
+To run the graph creation script, please run neo4j Neo4jConnect.py file, which already has all the neccesary conections to the delta tables and neo4j and directly performs the node and relationship creation/update if the nodes already exist.
+
+After runnig the script you will be aple to see teh results imediatly in the GUI of Neo4j runing at http://10.4.41.56:7474/browser/.
+
+
 
