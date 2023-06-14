@@ -4,10 +4,13 @@ Building a recommender for Cheezy start-up idea
 ##Prerequisite 
 Delta Lake:
 io.delta:delta-core_2.12:2.1.0
+
 Pyspark:
 3.3.0
+
 Neo4j connector:
 neo4j-connector-apache-spark_2.12_3.0-4.0.0
+
 Neo4j:
 4.4.20
 
