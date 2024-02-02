@@ -21,7 +21,6 @@ Other technologies used within the project:
 * Pyspark: 3.3.0
 * Neo4j connector: neo4j-connector-apache-spark_2.12_3.0-4.0.0
 * Neo4j: 4.4.20
-* Neo4j user: User: neo4j -- Password: foodie
 
 ## Neo4j Graph Creation
 Neo4j is running in the vitual machine, so please use the VM with the credentials above and start neo4j with command: 
